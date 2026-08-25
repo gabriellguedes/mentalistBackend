@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'corsheaders',
     #APPs
     'engine.users',
+    'engine.core',
 ]
 
 MIDDLEWARE = [
