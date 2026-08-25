@@ -1,0 +1,6 @@
+.venv
+.env
+*.sqlite3
+*.py[code]
+media/
+
