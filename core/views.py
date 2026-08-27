@@ -1,4 +1,5 @@
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 from .models import StudySession, AIPrompt, Technique, StudyRoom, RoomParticipant, RoomMessage
 from .serializers import (
     StudySessionSerializer, AIPromptSerializer, TechniqueSerializer,
@@ -29,7 +30,8 @@ class TechniqueViewSet(viewsets.ModelViewSet):
 class StudyRoomViewSet(viewsets.ModelViewSet):
     queryset = StudyRoom.objects.all()
     serializer_class = StudyRoomSerializer
-
+    permission_classes = [IsAuthenticated]
+     
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user if self.request.user.is_authenticated else None)
 
