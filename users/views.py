@@ -21,7 +21,7 @@ def me_view(request):
             "id": str(user.id),
             "username": user.username,
             "email": getattr(user, 'email', ''),
-            "full_name": user.get_full_name() or user.username,
+            "full_name": user.full_name,
             "total_focus_minutes": getattr(user, 'total_focus_minutes', 0.0),
         })
         

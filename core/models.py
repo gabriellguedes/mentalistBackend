@@ -34,7 +34,7 @@ class StudyRoom(models.Model):
     name = models.CharField(max_length=255)
     invite_code = models.CharField(max_length=50, blank=True, null=True)
     host_user_id = models.CharField(max_length=100, blank=True, null=True)
-    current_timer_status = models.CharField(max_length=100, blank=True, null=True)
+    current_timer_status = models.JSONField(blank=True, null=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

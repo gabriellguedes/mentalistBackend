@@ -23,6 +23,7 @@ class TechniqueSerializer(BaseEntitySerializer):
         fields = ['id', 'title', 'category', 'what_it_is', 'how_it_works', 'recommended_ai_prompt', 'created_date', 'updated_date', 'created_by_id']
 
 class StudyRoomSerializer(BaseEntitySerializer):
+    current_timer_status = serializers.CharField(required=False, allow_null=True, allow_blank=True)
     class Meta:
         model = StudyRoom
         fields = ['id', 'name', 'invite_code', 'host_user_id', 'current_timer_status', 'created_date', 'updated_date', 'created_by_id']
