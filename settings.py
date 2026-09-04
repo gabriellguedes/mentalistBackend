@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/6.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 from decouple import config, Csv
 from datetime import timedelta
@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['192.168.100.7', 'localhost', '127.0.0.1'] #config('ALLOWED_HOSTS', cast=Csv())
+ALLOWED_HOSTS = ['192.168.100.10', 'localhost', '127.0.0.1'] #config('ALLOWED_HOSTS', cast=Csv())
 
 
 # Application definition
@@ -45,8 +45,11 @@ INSTALLED_APPS = [
     'corsheaders',
     #APPs
     'engine.users',
+    'engine.friendship',
     'engine.core',
+   
 ]
+
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -120,7 +123,9 @@ CORS_ALLOWED_ORIGINS = [
     "https://nonsequent-enrique-patentably.ngrok-free.dev",
     "http://localhost:5173",    
     "http://127.0.0.1:5173",
-    "http://192.168.100.7:5173",
+    "http://192.168.100.10:5173",
+    "http://estudantementalista.local:5173",
+    "http://talos.local:5173",
     ]
 
 # Configuração unificada do Django REST Framework
@@ -146,16 +151,18 @@ SIMPLE_JWT = {
 # settings.py
 APPEND_SLASH = False
 
+# Configuração do Google OAuth Client ID
+GOOGLE_CLIENT_ID = config('GOOGLE_CLIENT_ID')
+
 # Internationalization
 # https://docs.djangoproject.com/en/6.1/topics/i18n/
 
 LANGUAGE_CODE = 'pt-br'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
+# Define o fuso horário para o horário de Brasília (América/São_Paulo)
+TIME_ZONE = 'America/Sao_Paulo'
+# Ativa o suporte a fusos horários no Django (Mantenha como True)
 USE_TZ = True
+USE_I18N = True
 
 
 # Static files (CSS, JavaScript, Images)
@@ -174,3 +181,11 @@ MAILERS = {
 }
 
 AUTH_USER_MODEL = 'users.CustomUser'
+
+# Configuração de arquivos enviados pelos usuários
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Permite que popups de autenticação (como o do Google) se comuniquem com a janela pai
+# SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None

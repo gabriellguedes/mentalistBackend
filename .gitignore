@@ -3,4 +3,4 @@
 *.sqlite3
 *.py[code]
 media/
-
+*/migrations/*
